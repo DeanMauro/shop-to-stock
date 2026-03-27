@@ -11,10 +11,10 @@ You're doing research and supporting a vendor every time you shop. Why not be an
 ## Table of contents
 
 - [What this does](#what-this-does)
+- [How it works](#how-it-works)
 - [What you'll need](#what-youll-need)
 - [Setup](#setup)
 - [OpenClaw setup guide](#openclaw-setup-guide)
-- [How it works](#how-it-works)
 - [Notes and gotchas](#notes-and-gotchas)
 - [Repo structure](#repo-structure)
 - [License](#license)
