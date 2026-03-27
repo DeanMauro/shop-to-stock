@@ -8,6 +8,17 @@ The idea is simple:
 You're doing research and supporting a vendor every time you shop. Why not be an owner too?
 (Oh and if you don't make a lot of purchases, don't worry. We'll toss $5 in the trusty **S&P 500** instead)
 
+## Table of contents
+
+- [What this does](#what-this-does)
+- [What you'll need](#what-youll-need)
+- [Setup](#setup)
+- [OpenClaw setup guide](#openclaw-setup-guide)
+- [How it works](#how-it-works)
+- [Notes and gotchas](#notes-and-gotchas)
+- [Repo structure](#repo-structure)
+- [License](#license)
+
 ---
 
 ## What this does

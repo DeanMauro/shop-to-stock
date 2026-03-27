@@ -158,7 +158,7 @@ If trade submission succeeds but the combined script path fails during republish
 
 ### 5. Automate the daily loop with cron
 
-Create a daily cron job that runs before market open in the user’s timezone.
+Create a daily cron job that runs at market open in the user’s timezone.
 
 Recommended cron behavior:
 
@@ -173,7 +173,7 @@ Use a cron `agentTurn` job for the daily diary-generation task, not a `systemEve
 Prefer the deterministic helper for setup:
 
 ```bash
-python3 scripts/install_cron.py --telegram-chat-id <chat-id>
+python3 scripts/install_cron.py --telegram-chat-id <chat-id> --hour 9 --minute 30
 ```
 
 Recommended delivery shape:

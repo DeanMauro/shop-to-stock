@@ -165,15 +165,15 @@ def aggregate_transactions(transactions):
 
 def demo_transactions(day):
     sample = [
-        ("txn_demo_amzn_001", "AMZN Mktp US*AB12", 84.27),
-        ("txn_demo_uber_001", "PAYPAL *UBER", 26.14),
-        ("txn_demo_sbux_001", "STARBUCKS 1234", 12.85),
-        ("txn_demo_lyv_001", "LIVE NATION TICKETS", 149.50),
-        ("txn_demo_baba_001", "ALIBABA.COM", 63.40),
-        ("txn_demo_weg_001", "WEGMANS", 54.21),
-        ("txn_demo_bagel_001", "CLIFTON BAGELS", 18.90),
-        ("txn_demo_bar_001", "J&R SPORTS BAR", 37.60),
-        ("txn_demo_bakery_001", "DA VINCI BAKERY", 22.75),
+        ("txn_pqbbbtbpamzn5ge8tg3i001", "AMZN Mktp US*AB12", 84.27),
+        ("txn_pqbbbtbpuber5ge8tg3i002", "PAYPAL *UBER", 26.14),
+        ("txn_pqbbbtbpsbux5ge8tg3i003", "STARBUCKS 1234", 12.85),
+        ("txn_pqbbbtbplyv05ge8tg3i004", "LIVE NATION TICKETS", 149.50),
+        ("txn_pqbbbtbpbaba5ge8tg3i005", "ALIBABA.COM", 63.40),
+        ("txn_pqbbbtbpwegm5ge8tg3i006", "WEGMANS", 54.21),
+        ("txn_pqbbbtbpbagl5ge8tg3i007", "CLIFTON BAGELS", 18.90),
+        ("txn_pqbbbtbpbars5ge8tg3i008", "J&R SPORTS BAR", 37.60),
+        ("txn_pqbbbtbpbake5ge8tg3i009", "DA VINCI BAKERY", 22.75),
     ]
     return [
         {
@@ -255,7 +255,7 @@ def build_plan(day, use_demo=False):
             'resolutionSource': 'fallback',
             'orderDollars': fallback_needed,
             'merchantSpend': 0,
-            'orderStatus': 'awaiting approval',
+            'orderStatus': 'pending',
             'isFallback': True,
         })
     quotes = get_equity_quotes([p['ticker'] for p in picks]) if picks else {}
@@ -263,7 +263,7 @@ def build_plan(day, use_demo=False):
         price = quotes.get(pick['ticker'])
         pick['currentPrice'] = price
         pick['estimatedShares'] = round(float(pick.get('orderDollars', 1)) / price, 6) if price and price > 0 else None
-        pick['orderStatus'] = pick.get('orderStatus', 'awaiting approval')
+        pick['orderStatus'] = pick.get('orderStatus', 'pending')
     public_by_normalized = {normalize_merchant(p["merchantName"]): p for p in picks if not p.get('isFallback')}
     combined = []
     for merchant in merchants[:10]:
@@ -294,7 +294,7 @@ def build_plan(day, use_demo=False):
                 'public': True,
                 'label': 'Fallback investment',
                 'buy': pick,
-                'orderStatus': pick.get('orderStatus', 'awaiting approval'),
+                'orderStatus': pick.get('orderStatus', 'pending'),
                 'isFallback': True,
             })
     combined.extend(fallback_entries)
@@ -394,7 +394,7 @@ def print_confirmation(plan):
         print("Skipped / unresolved:")
         for item in plan["skipped"][:12]:
             print(f"- {item['name']}: {item['reason']}")
-    print("\nConfirmation required before placing orders.")
+    print("\nOrders are pending until execution.")
 
 
 def main():

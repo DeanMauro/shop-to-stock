@@ -117,7 +117,7 @@ function pageBg() { return `<div class="bg-image"></div><div class="bg-scrim"></
 function renderLogo(symbol, env) { return env.LOGO_DEV_TOKEN && symbol ? `<img class="logo" src="https://img.logo.dev/ticker/${encodeURIComponent(symbol)}?token=${encodeURIComponent(env.LOGO_DEV_TOKEN)}" alt="${esc(symbol)} logo" />` : ''; }
 function renderStatus(status) {
   const s = String(status || 'unknown').toLowerCase();
-  const kind = s.includes('filled') ? 'good' : s.includes('placed') ? 'good' : s.includes('approval') ? 'warn' : s.includes('failed') ? 'bad' : s.includes('eligible') || s.includes('no buy') ? 'gray' : 'gray';
+  const kind = s.includes('filled') ? 'good' : s.includes('placed') ? 'good' : s.includes('pending') ? 'warn' : s.includes('approval') ? 'warn' : s.includes('failed') ? 'bad' : s.includes('eligible') || s.includes('no buy') ? 'gray' : 'gray';
   const label = s === 'not eligible' ? 'No buy' : status || 'Unknown';
   return `<span class="pill ${kind}"><span class="dot ${kind}"></span>${esc(label)}</span>`;
 }

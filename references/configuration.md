@@ -35,6 +35,7 @@ The skill uses the Public.com Python SDK approach from the installed public.com 
 ## Daily execution model
 
 1. Build a diary for the requested/current day.
+   - Recommended production cron time: 9:30 AM America/New_York (market open)
 2. Attempt to use prior-day transactions first.
 3. If the requested day has no useful merchant activity, fall back to the latest useful available transaction date.
 4. Keep the published diary on the requested/current day even when older source data is used.
