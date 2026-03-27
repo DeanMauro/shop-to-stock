@@ -2,15 +2,11 @@
 
 Turn your shopping habits into a tiny investing ritual.
 
-**Shop-to-Stock** connects your bank with **Teller**, maps your recent merchant activity to public companies when possible, places tiny buys through **Public.com**, and publishes a gorgeous daily diary page so you can see what happened.
+**Shop-to-Stock** connects your bank with **Teller**, maps your recent merchant activity to public companies where possible, buys $1 of each company's stock through **Public.com**, and sends you a  daily summary so you can see your wealth grow in real time.
 
-The vibe is simple:
-- shopped at a public company? buy a little of it
-- not enough good public matches? fall back to the trusty **S&P 500**
-- get a daily update in chat before the market opens
-- watch your spending slowly turn into ownership
-
-It’s part investing experiment, part product demo, part delight machine.
+The idea is simple:
+You're doing research and supporting a vendor every time you shop. Why not be an owner too?
+(Oh and if you don't make a lot of purchases, don't worry. We'll toss $5 in the trusty **S&P 500** instead)
 
 ---
 
@@ -61,11 +57,12 @@ This project is designed to run through **OpenClaw** with a deployed **Cloudflar
 
 ---
 
-## Required configuration
+## Setup
 
-Shop-to-Stock needs the following environment variables or equivalent secure local configuration.
+Shop-to-Stock needs the following environment variables or equivalent secure local configuration. All services used are free!
 
 ### Teller
+* Connects to your bank account to grab daily transactions *
 
 - `TELLER_CERT_FILE`
 - `TELLER_KEY_FILE`
@@ -74,42 +71,55 @@ Shop-to-Stock needs the following environment variables or equivalent secure loc
 
 How to get them:
 - Create a Teller app / get your application id:
-  <https://teller.io/docs/connect/>
+  <https://teller.io>
+  
+  <img width="540" height="200" alt="Screenshot 2026-03-27 at 2 04 43 PM" src="https://github.com/user-attachments/assets/889957d5-bfcb-4f93-aa48-d38b0edae442" />
+
 - Generate/download your Teller certificates for mTLS:
-  <https://teller.io/docs/api#mutual-tls>
-- `TELLER_ACCESS_TOKEN` is created after the user completes Teller Connect in the hosted worker flow
+
+  <img width="554" height="337" alt="Screenshot 2026-03-27 at 2 07 56 PM" src="https://github.com/user-attachments/assets/d1f2ae3b-ec4b-46c9-a27d-c4712bf36fa2" />
+
+- Don't worry about `TELLER_ACCESS_TOKEN`. It gets created automatically when you connect your account to OpenClaw.
 
 ### Public.com
+* An awesome brokerage that lets your agent place trades *
 
 - `PUBLIC_COM_SECRET`
 - `PUBLIC_COM_ACCOUNT_ID`
 
 How to get them:
-- Public API docs: <https://public.com/api>
-- You’ll need API credentials and the target brokerage account number you want trades placed in
+- Create an API key on public.com: <[https://public.com/api](https://public.com/settings/v2/api)>
+
+<img width="259" height="225" alt="Screenshot 2026-03-27 at 2 11 07 PM" src="https://github.com/user-attachments/assets/55845bb9-2824-431b-9d72-5df70dc47dba" />
+
+- Grab your account ID from the hamburger menu
+
+<img width="390" height="200" alt="Screenshot 2026-03-27 at 2 16 09 PM" src="https://github.com/user-attachments/assets/5fb4160f-ef16-4afa-8e4e-6a5251d25cfc" />
+
 
 ### Cloudflare
+* Hosts UIs for when we need to go beyond the chat interface *
 
 - `CLOUDFLARE_ACCOUNT_ID`
 - `CLOUDFLARE_API_TOKEN`
 - `CLOUDFLARE_KV_NAMESPACE_ID`
-- `SHOP_TO_STOCK_BASE_URL`
-- `SHOP_TO_STOCK_ADMIN_SECRET`
 
 How to get them:
 - Cloudflare account id: dashboard overview
+  
+<img width="428" height="178" alt="Screenshot 2026-03-27 at 2 24 45 PM" src="https://github.com/user-attachments/assets/bb14dfba-06f0-4ca1-957d-685eb7cffdec" />
+
 - API token for Workers/KV operations:
-  <https://developers.cloudflare.com/fundamentals/api/get-started/create-token/>
+  <https://dash.cloudflare.com/profile/api-tokens>
+  
+<img width="688" height="57" alt="Screenshot 2026-03-27 at 2 22 36 PM" src="https://github.com/user-attachments/assets/9ccc1234-391d-46bc-8766-9ae7c986eab2" />
+
 - Create a KV namespace:
   <https://developers.cloudflare.com/kv/get-started/>
-- `SHOP_TO_STOCK_BASE_URL` is your deployed worker URL
-- `SHOP_TO_STOCK_ADMIN_SECRET` can be any strong random secret used to retrieve pending Teller tokens and protected debug state
 
 ### Telegram / cron delivery
 
 - `TELEGRAM_CHAT_ID`
-- `OPENCLAW_GATEWAY_URL`
-- `OPENCLAW_GATEWAY_TOKEN`
 
 How to get them:
 - `TELEGRAM_CHAT_ID` is the Telegram chat target for delivery
