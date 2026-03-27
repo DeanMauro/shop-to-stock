@@ -104,6 +104,8 @@ How to get them:
 - `CLOUDFLARE_API_TOKEN`
 - `CLOUDFLARE_KV_NAMESPACE_ID`
 
+These are the Cloudflare values **you** provide.
+
 How to get them:
 - Cloudflare account id: dashboard overview
   
@@ -121,9 +123,28 @@ How to get them:
 
 - `TELEGRAM_CHAT_ID`
 
-How to get them:
+How to get it:
 - `TELEGRAM_CHAT_ID` is the Telegram chat target for delivery
-- Gateway URL/token depend on your OpenClaw deployment and cron setup
+
+### What setup creates for you
+
+You do **not** need to manually provide these ahead of time:
+
+- `SHOP_TO_STOCK_BASE_URL`
+  - created once the worker is deployed
+- `SHOP_TO_STOCK_ADMIN_SECRET`
+  - should be generated during setup
+- `TELLER_ACCESS_TOKEN`
+  - created automatically after the bank connect flow is completed
+
+### What OpenClaw should already provide
+
+These are runtime/operator values, not normal end-user setup inputs:
+
+- `OPENCLAW_GATEWAY_URL`
+- `OPENCLAW_GATEWAY_TOKEN`
+
+If you are running inside a normal OpenClaw environment, you usually should not need to manually hunt these down just to use the skill.
 
 ### Optional but useful
 
@@ -160,13 +181,15 @@ export PUBLIC_COM_ACCOUNT_ID=...
 export CLOUDFLARE_ACCOUNT_ID=...
 export CLOUDFLARE_API_TOKEN=...
 export CLOUDFLARE_KV_NAMESPACE_ID=...
-export SHOP_TO_STOCK_BASE_URL=https://your-worker.workers.dev
-export SHOP_TO_STOCK_ADMIN_SECRET=...
 export TELLER_APPLICATION_ID=...
 export TELEGRAM_CHAT_ID=...
-export OPENCLAW_GATEWAY_URL=...
-export OPENCLAW_GATEWAY_TOKEN=...
 ```
+
+Then, during setup:
+- worker deployment gives you `SHOP_TO_STOCK_BASE_URL`
+- setup generates `SHOP_TO_STOCK_ADMIN_SECRET`
+- bank connect creates `TELLER_ACCESS_TOKEN`
+- OpenClaw runtime should provide `OPENCLAW_GATEWAY_URL` / `OPENCLAW_GATEWAY_TOKEN` for cron installation
 
 ### 3. Validate setup
 
