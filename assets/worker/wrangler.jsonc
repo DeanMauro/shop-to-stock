@@ -1,0 +1,21 @@
+{
+  "name": "shop-to-stock",
+  "main": "worker.js",
+  "compatibility_date": "2026-03-26",
+  "kv_namespaces": [
+    {
+      "binding": "SHOP_TO_STOCK_KV",
+      "id": "__SET_KV_NAMESPACE_ID__"
+    }
+  ],
+  "vars": {
+    "TELLER_APPLICATION_ID": "__SET_TELLER_APPLICATION_ID__",
+    "SHOP_TO_STOCK_ADMIN_SECRET": "__SET_ADMIN_SECRET__",
+    "LOGO_DEV_TOKEN": "__SET_LOGO_DEV_TOKEN__",
+    "PUBLIC_COM_ACCOUNT_ID": "__SET_PUBLIC_COM_ACCOUNT_ID__"
+  },
+  "assets": {
+    "directory": "./static",
+    "binding": "ASSETS"
+  }
+}

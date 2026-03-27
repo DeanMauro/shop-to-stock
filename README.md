@@ -1,2 +1,3 @@
 # shop-to-stock
-Each day buys stock in the companies you've shopped at
+
+Turn yesterday's shopping into tiny stock buys with Teller, Public.com, and a hosted diary UI.
