@@ -1,5 +1,8 @@
 # shop-to-stock
 
+<img width="375" height="500" alt="hf_20260327_193110_beba0acb-0e03-4ac2-9485-633a6e49114d" src="https://github.com/user-attachments/assets/5a7ee75d-6914-4983-ba17-bc1efa2f192e" />
+
+
 Turn your shopping habits into a tiny investing ritual.
 
 **Shop-to-Stock** connects your bank with **Teller**, maps your recent merchant activity to public companies where possible, buys $1 of each company's stock through **Public.com**, and sends you a  daily summary so you can see your wealth grow in real time.
