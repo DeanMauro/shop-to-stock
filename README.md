@@ -69,6 +69,9 @@ Important detail:
 
 ### Step 3 — Buy Some Stocks!
 
+<img width="361" height="126" alt="Screenshot 2026-03-27 at 3 12 39 PM" src="https://github.com/user-attachments/assets/ac31e050-d462-497c-874d-d246061fe49c" />
+
+
 OpenClaw will then purchase $1 of each company's stock on Public, update your current holdings and buying power on the homepage.
 
 ### Step 4 — Notification
