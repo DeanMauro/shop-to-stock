@@ -38,6 +38,45 @@ If there aren’t enough usable public-company matches, it falls back to **SPY**
 
 ---
 
+## How it works
+
+Once OpenClaw has everything set up, it will guide you through the following:
+
+### Step 0 — The UI
+
+Once it creates a Cloudflare Worker and builds the "Shop to Stock" UI, your claw will send you a link to it. Chat is great but for some things, you need to be able to point and click or see things visually that can't be captured in text. It looks something like this:
+
+<img width="600" height="500" alt="Screenshot 2026-03-27 at 2 48 00 PM" src="https://github.com/user-attachments/assets/d3a52e71-2a6f-4544-a36a-cc77a8832784" />
+
+### Step 1 — Bank connection
+
+First things first. We need to let OpenClaw see our bank transactions. It should prompt you to head to the connect page and use Teller to hook up your bank account. You can choose as many or few of your accounts/cards as you like. I use my credit card for everything so I just went with that.
+
+<img width="240" height="400" alt="Screenshot 2026-03-27 at 2 43 18 PM" src="https://github.com/user-attachments/assets/7d1f2e6e-0cd0-41b5-a86a-a9eaa053b97e" />
+
+<img width="240" height="400" alt="Screenshot 2026-03-27 at 2 43 27 PM" src="https://github.com/user-attachments/assets/ca3fe110-1124-4ff9-85c8-b816dbd7f1f3" />
+
+
+### Step 2 — Daily Summary
+
+<img width="762" height="600" alt="Screenshot 2026-03-27 at 2 58 32 PM" src="https://github.com/user-attachments/assets/6f81fa63-52e4-491d-bb32-182c408deeaf" />
+
+Each day, OpenClaw adds a page to our investing diary sharing what purchases it found and which stocks it bought in response.
+
+Important detail:
+- If you made no purchases, OpenClaw will use those from the last day that had purchases.
+- If you made purchases but none were from public companies, OpenClaw will buy SPY.
+
+### Step 3 — Buy Some Stocks!
+
+OpenClaw will then purchase $1 of each company's stock on Public, update your current holdings and buying power on the homepage.
+
+### Step 4 — Notification
+
+Once your investments have been placed, OpenClaw will message you on Telegram with a link to the summary for that day so you can follow your wealth-building journey in real-time!
+
+---
+
 ## What you’ll need
 
 This project is designed to run through **OpenClaw** with a deployed **Cloudflare Worker**, **Teller** for bank connectivity, and **Public.com** for trading.
@@ -70,10 +109,10 @@ This project is designed to run through **OpenClaw** with a deployed **Cloudflar
 
 ## Setup
 
-Shop-to-Stock needs the following environment variables or equivalent secure local configuration. All services used are free!
+Shop-to-Stock needs the following environment variables or equivalent secure local configuration. I know, there's a lot but all these services are free and makes the experience great!
 
 ### Teller
-* Connects to your bank account to grab daily transactions *
+*Connects to your bank account to grab daily transactions*
 
 - `TELLER_CERT_FILE`
 - `TELLER_KEY_FILE`
@@ -93,7 +132,7 @@ How to get them:
 - Don't worry about `TELLER_ACCESS_TOKEN`. It gets created automatically when you connect your account to OpenClaw.
 
 ### Public.com
-* An awesome brokerage that lets your agent place trades *
+*An awesome brokerage that lets your agent place trades*
 
 - `PUBLIC_COM_SECRET`
 - `PUBLIC_COM_ACCOUNT_ID`
@@ -109,7 +148,7 @@ How to get them:
 
 
 ### Cloudflare
-* Hosts UIs for when we need to go beyond the chat interface *
+*Hosts UIs for when we need to go beyond the chat interface*
 
 - `CLOUDFLARE_ACCOUNT_ID`
 - `CLOUDFLARE_API_TOKEN`
@@ -130,12 +169,21 @@ How to get them:
 - Create a KV namespace:
   <https://developers.cloudflare.com/kv/get-started/>
 
+### Logo.dev
+*Provides logos for each company you invest in*
+
+- `LOGO_DEV_TOKEN`
+
+How to get it:
+- Create a FREE account [here](https://www.logo.dev)
+
 ### Telegram / cron delivery
+*Lets OpenClaw send you updates each day even if you're on the go!*
 
 - `TELEGRAM_CHAT_ID`
 
 How to get it:
-- `TELEGRAM_CHAT_ID` is the Telegram chat target for delivery
+- Follow the guide to setup Telegram in OpenClaw [here](https://docs.openclaw.ai/channels/telegram), then get the ID of the chat it creates.
 
 ### What setup creates for you
 
@@ -159,8 +207,7 @@ If you are running inside a normal OpenClaw environment, you usually should not 
 
 ### Optional but useful
 
-- `BRAVE_API_KEY`
-- `LOGO_DEV_TOKEN`
+- `BRAVE_API_KEY` or whichever [search provider you use in OpenClaw](https://docs.openclaw.ai/tools/brave-search#brave-search)
 
 ---
 
@@ -202,141 +249,14 @@ Then, during setup:
 - bank connect creates `TELLER_ACCESS_TOKEN`
 - OpenClaw runtime should provide `OPENCLAW_GATEWAY_URL` / `OPENCLAW_GATEWAY_TOKEN` for cron installation
 
-### 3. Validate setup
+### 3. Tell OpenClaw to set it up
 
-Run:
-
-```bash
-python3 scripts/validate_setup.py
-```
-
-This checks whether the required env vars and local Teller cert/key files are present.
-
-### 4. Deploy the worker
-
-Run:
-
-```bash
-bash scripts/deploy_worker.sh
-```
-
-That publishes the hosted UI / diary app to Cloudflare Workers.
-
-### 5. Connect the bank account
-
-Open:
-
-```text
-https://<your-worker-host>/connect
-```
-
-Complete the Teller Connect flow.
-
-When it succeeds, the page will show a **nonce**.
-
-### 6. Retrieve and save the Teller access token
-
-Run:
-
-```bash
-python3 scripts/retrieve_teller_token.py --nonce <nonce>
-```
-
-This pulls the fresh Teller access token from the worker and updates your local env file.
-
-### 7. Test a diary run manually
-
-To generate and publish a diary without demo mode:
-
-```bash
-python3 scripts/shop_to_stock.py --publish --json
-```
-
-To place trades and republish the diary:
-
-```bash
-python3 scripts/shop_to_stock.py --confirm --publish --json
-```
-
-### 8. Install the daily cron
-
-To create the Telegram-delivered pre-market job:
-
-```bash
-python3 scripts/install_cron.py --telegram-chat-id <chat-id>
-```
-
-That cron is designed to:
-- generate today’s diary
-- use the latest useful available transaction data if needed
-- place the planned trades automatically
-- republish the diary with updated statuses
-- message you the final result in Telegram
+OpenClaw has the scripts to take it from here.
 
 ---
 
-## How it works
-
-This section is a good place for screenshots and annotated examples.
-
-### Step 1 — Bank connection
-
-_Add screenshot of the hosted `/connect` page here._
-
-The worker hosts a Teller Connect onboarding page. Once the user completes bank linking, the worker stores the pending Teller token and connection metadata.
-
-### Step 2 — Daily diary generation
-
-_Add screenshot of the diary homepage or date picker here._
-
-Each day, Shop-to-Stock builds a diary page for the current run date.
-
-Important detail:
-- if yesterday has no useful merchant transactions,
-- the diary still publishes for **today**,
-- but transparently notes that it used the latest useful available transaction date.
-
-### Step 3 — Merchant matching
-
-_Add screenshot of diary line items here._
-
-Merchant names are cleaned up and matched to public parent companies when possible.
-
-Examples:
-- Starbucks → `SBUX`
-- Uber → `UBER`
-- Live Nation → `LYV`
-- Whole Foods → `AMZN`
-
-If no strong public-company match exists, that merchant remains visible in the diary but does not generate a direct stock buy.
-
-### Step 4 — Fallback behavior
-
-_Add screenshot of fallback row here._
-
-If there aren’t enough public matches, Shop-to-Stock falls back to a single **SPY** row with the full fallback amount.
-
-That means the investing loop still happens even on boring days.
-
-### Step 5 — Holdings + status updates
-
-_Add screenshot of holdings section here._
-
-After trades execute, the worker republishes the diary and updates holdings so the hosted page reflects:
-- what was submitted
-- what was skipped
-- current holdings snapshot
-- buying power in the Public account
-
----
 
 ## Notes and gotchas
-
-- **Public SDK order ids matter.**
-  The Public order request must include a real string `order_id`. Passing `None` will fail validation.
-
-- **Trade submit and republish are separate concerns.**
-  If an order succeeds but diary republish fails, reconcile the UI by updating the summary payload in KV rather than resubmitting the trade.
 
 - **Teller data can lag.**
   You may see today’s diary built from older source transaction data if no newer useful merchant transactions are available yet.
@@ -347,27 +267,6 @@ After trades execute, the worker republishes the diary and updates holdings so t
 - **This is real money.**
   Even though the default buy sizes are tiny, auto-trading should still be treated with care.
 
----
+## Disclaimer
 
-## Repo structure
-
-```text
-SKILL.md
-assets/worker/
-references/
-scripts/
-```
-
-### Important scripts
-
-- `scripts/validate_setup.py`
-- `scripts/retrieve_teller_token.py`
-- `scripts/install_cron.py`
-- `scripts/shop_to_stock.py`
-- `scripts/deploy_worker.sh`
-
----
-
-## License
-
-See the repository license file.
+The information provided in this repo is for general informational purposes only and is not legal, tax, accounting, or investment advice. Past performance, including hypothetical or backtested results, does not guarantee future results. Trading and investing in any asset class, including equities, options, futures, and digital assets (including crypto), involves substantial risk and may result in losses up to and including the loss of your entire investment. You should not invest or risk money you cannot afford to lose. Online trading is not suitable for all investors. All product and company names and logos are trademarks™ or registered trademarks® of their respective holders, and their use does not imply affiliation with or endorsement by those holders.
