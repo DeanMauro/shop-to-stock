@@ -226,12 +226,11 @@ This is the cleanest way to get Shop-to-Stock running inside OpenClaw.
 
 ### 1. Install the skill
 
-Add the skill into your OpenClaw workspace or install the packaged `.skill` artifact.
+Ask OpenClaw to install the skill for you:
 
-If you’re using the skill folder directly, place it under your skills directory as:
-
-```text
-skills/shop-to-stock
+```
+Install the skill located here: https://github.com/DeanMauro/shop-to-stock.
+It is a GitHub repo containing the skill for connecting bank accounts to brokerage accounts
 ```
 
 ### 2. Add your secrets / env vars
