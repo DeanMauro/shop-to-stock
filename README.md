@@ -1,7 +1,9 @@
-# shop-to-stock
+# Shop to Stock
 
 <p align="center">
-<img width="375" height="500" alt="hf_20260327_193110_beba0acb-0e03-4ac2-9485-633a6e49114d" src="https://github.com/user-attachments/assets/5a7ee75d-6914-4983-ba17-bc1efa2f192e" />
+  <a href="https://www.youtube.com/watch?v=vwNpV6_7AHs">
+  <img width="849" height="472" alt="Screenshot 2026-03-27 at 9 13 54 PM" src="https://github.com/user-attachments/assets/312e54e5-6c18-4df8-ba10-7a5593faac4d" />
+  </a>
 </p>
 
 Turn your shopping habits into a tiny investing ritual.
