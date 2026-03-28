@@ -48,13 +48,13 @@ If there aren’t enough usable public-company matches, it falls back to **SPY**
 
 Once OpenClaw has everything set up, it will guide you through the following:
 
-### Step 0 — The UI
+### Step 0: The UI
 
 Once it creates a Cloudflare Worker and builds the "Shop to Stock" UI, your claw will send you a link to it. Chat is great but for some things, you need to be able to point and click or see things visually that can't be captured in text. It looks something like this:
 
-<img width="600" height="500" alt="Screenshot 2026-03-27 at 2 48 00 PM" src="https://github.com/user-attachments/assets/d3a52e71-2a6f-4544-a36a-cc77a8832784" />
+<img width="600" height="500" alt="Screenshot 2026-03-27 at 2 48 00 PM" src="https://github.com/user-attachments/assets/996b3b87-64e3-435e-afe1-fd93d84999e4" />
 
-### Step 1 — Bank connection
+### Step 1: Bank connection
 
 First things first. We need to let OpenClaw see our bank transactions. It should prompt you to head to the connect page and use Teller to hook up your bank account. You can choose as many or few of your accounts/cards as you like. I use my credit card for everything so I just went with that.
 
@@ -63,7 +63,7 @@ First things first. We need to let OpenClaw see our bank transactions. It should
 <img width="240" height="400" alt="Screenshot 2026-03-27 at 2 43 27 PM" src="https://github.com/user-attachments/assets/ca3fe110-1124-4ff9-85c8-b816dbd7f1f3" />
 
 
-### Step 2 — Daily Summary
+### Step 2: Daily Summary
 
 <img width="762" height="600" alt="Screenshot 2026-03-27 at 2 58 32 PM" src="https://github.com/user-attachments/assets/6f81fa63-52e4-491d-bb32-182c408deeaf" />
 
@@ -73,14 +73,14 @@ Important detail:
 - If you made no purchases, OpenClaw will use those from the last day that had purchases.
 - If you made purchases but none were from public companies, OpenClaw will buy SPY.
 
-### Step 3 — Buy Some Stocks!
+### Step 3: Buy Some Stocks!
 
 <img width="361" height="126" alt="Screenshot 2026-03-27 at 3 12 39 PM" src="https://github.com/user-attachments/assets/ac31e050-d462-497c-874d-d246061fe49c" />
 
 
 OpenClaw will then purchase $1 of each company's stock on Public, update your current holdings and buying power on the homepage.
 
-### Step 4 — Notification
+### Step 4: Notification
 
 Once your investments have been placed, OpenClaw will message you on Telegram with a link to the summary for that day so you can follow your wealth-building journey in real-time!
 
