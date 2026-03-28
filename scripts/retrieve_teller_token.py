@@ -32,7 +32,7 @@ def main():
     parser.add_argument('--nonce', required=True)
     parser.add_argument('--base-url', default=os.getenv('SHOP_TO_STOCK_BASE_URL'))
     parser.add_argument('--admin-secret', default=os.getenv('SHOP_TO_STOCK_ADMIN_SECRET'))
-    parser.add_argument('--env-file', default=os.path.expanduser('~/.openclaw/workspace/.secrets/shop_to_stock_env.sh'))
+    parser.add_argument('--env-file', default=os.getenv('SHOP_TO_STOCK_ENV_FILE', './.secrets/shop_to_stock_env.sh'))
     args = parser.parse_args()
 
     if not args.base_url:

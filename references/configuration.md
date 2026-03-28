@@ -14,7 +14,7 @@ Teller uses mutual TLS plus an access token. The skill assumes the cert/key file
 - `PUBLIC_COM_SECRET`
 - `PUBLIC_COM_ACCOUNT_ID`
 
-The skill uses the Public.com Python SDK approach from the installed public.com skill and also honors secure files under `~/.openclaw/workspace/.secrets/`.
+The skill uses the Public.com Python SDK approach from the installed public.com skill and can read secure local files from `./.secrets/` by default, or from paths provided through environment variables.
 
 ### Cloudflare
 - `CLOUDFLARE_ACCOUNT_ID`

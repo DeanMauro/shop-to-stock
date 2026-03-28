@@ -37,7 +37,7 @@ except ImportError:
 
 
 def get_public_secret():
-    secret_file = os.path.expanduser("~/.openclaw/workspace/.secrets/public_com_secret.txt")
+    secret_file = os.path.expanduser(os.getenv('SHOP_TO_STOCK_PUBLIC_SECRET_FILE', './.secrets/public_com_secret.txt'))
     if os.path.exists(secret_file):
         with open(secret_file, "r", encoding="utf-8") as f:
             value = f.read().strip()
@@ -47,7 +47,7 @@ def get_public_secret():
 
 
 def get_public_account_id():
-    acct_file = os.path.expanduser("~/.openclaw/workspace/.secrets/public_com_account.txt")
+    acct_file = os.path.expanduser(os.getenv('SHOP_TO_STOCK_PUBLIC_ACCOUNT_FILE', './.secrets/public_com_account.txt'))
     if os.path.exists(acct_file):
         with open(acct_file, "r", encoding="utf-8") as f:
             value = f.read().strip()
